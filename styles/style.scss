@@ -17,7 +17,8 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 // Обнуление стилей
 
 :root{
-
+	--cellsSize: 50px;
+	--playgroundCellsSize: 0px;
 }
 
 body{
@@ -32,7 +33,6 @@ body{
 }
 
 .playground__cells{
-  width: 500px;
   flex-wrap: wrap;
   display: flex;
   box-sizing: content-box;
@@ -42,8 +42,8 @@ body{
 }
 
 .playground__cell{
-  width: 50px;
-  height: 50px;
+  width: var(--cellsSize);
+  height: var(--cellsSize);
   font-size: 25px;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@ body{
   transition: .3s;
   &:hover{
     cursor: pointer;
-    background-color: rgb(206, 206, 206);
+    border: 4px outset rgb(255, 174, 0);
     transition: .3s;
   }
   &:active{
@@ -66,5 +66,11 @@ body{
     background: transparent;
     border: 2px inset rgb(255, 255, 255);
     transition: .3s;
+  }
+  &.flag-cell{
+    &:active{
+      background-color: rgb(59, 59, 59);
+      border: 2px outset rgb(255, 255, 255);
+    }
   }
 }
