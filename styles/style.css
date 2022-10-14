@@ -81,13 +81,70 @@ body {
 }
 
 .playground__container {
+  position: relative;
+  max-width: 1200px;
   margin: 50px auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.playground__modal {
+  position: absolute;
+  top: -100%;
+  height: var(--playgroundCellsSize);
+  width: var(--playgroundCellsSize);
+  background-color: rgba(255, 255, 255, 0.507);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.7s;
+}
+.playground__modal.open-modal {
+  top: 2px;
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.7s;
+}
+
+.playground__modal-text {
+  margin: 25px 0;
+  font-size: 25px;
+  padding: 5px;
+  color: white;
+  border: 2px outset rgb(255, 174, 0);
+  border-radius: 5px;
+  background-color: rgb(59, 59, 59);
+}
+
+.playground__btn {
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px;
+  background-color: rgb(59, 59, 59);
+  border: 2px outset rgb(255, 255, 255);
+  transition: 0.3s;
+}
+.playground__btn:hover {
+  cursor: pointer;
+  color: rgb(255, 174, 0);
+  border: 2px outset rgb(255, 174, 0);
+  transition: 0.3s;
+}
+.playground__btn:active {
+  border: 2px inset rgb(255, 255, 255);
+  transform: scale(0.99);
+  transition: 0.3s;
 }
 
 .playground__cells {
+  width: var(--playgroundCellsSize);
   flex-wrap: wrap;
   display: flex;
   box-sizing: content-box;

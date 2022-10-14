@@ -7,10 +7,17 @@ let bombCount = 15;
 let bombFrequency = 0.2;
 let number = [];
 let numberColor = ['#3498db', '#2ecc71', '#e74c3c', '#9b59b6', '#f1c40f', '#1abc9c', '#34495e', '#7f8c8d',];
+let textMessage = {
+  win: "You win! Congratulations!",
+  loose: "You lost! Try again!",
+}
 
 let gameOver = false;
 
 const playgroundCells = document.querySelector(".playground__cells");
+const modalText = document.querySelector(".playground__modal-text");
+const modalWindow = document.querySelector(".playground__modal");
+const modalBtn = document.querySelector(".btn-newgame");
 
 
 function setup() {
@@ -23,7 +30,6 @@ function setup() {
 
   cells = document.querySelectorAll(".playground__cell");
   playgroundCellsSize = Math.sqrt(cells.length);
-  playgroundCells.style.width = playgroundCellsSize * cellsSize + 'px';
 
   document.documentElement.style.setProperty('--tileSize', `${cellsSize}px`);
   document.documentElement.style.setProperty('--playgroundCellsSize', `${playgroundCellsSize*cellsSize}px`);
@@ -165,7 +171,8 @@ function checkCell(coordinate) {
 }
 
 function endGame() {
-  
+  modalText.innerHTML = textMessage.loose;
+  modalWindow.classList.add("open-modal");
   gameOver = true;
   cells.forEach(cell => {
     let coordinate = cell.getAttribute('data-coords');
@@ -186,6 +193,8 @@ function checkVictory() {
     }
   });
   if (win) {
+    modalText.innerHTML = textMessage.win;
+    modalWindow.classList.add("open-modal");
     gameOver = true;
   }
 }
@@ -194,7 +203,19 @@ function newGame() {
   bombs = [];
   number = [];
   gameOver = false;
+  modalText.innerHTML = '';
+  modalWindow.classList.remove("open-modal");
+  cells.forEach(cell => {
+    cell.remove();
+  })
+  setup();
 }
+
+modalBtn.addEventListener('click', () => {
+  newGame()
+})
+
+
 
 
 
