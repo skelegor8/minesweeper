@@ -9,7 +9,7 @@ let number = [];
 let numberColor = ['#3498db', '#2ecc71', '#e74c3c', '#9b59b6', '#f1c40f', '#1abc9c', '#34495e', '#7f8c8d',];
 let textMessage = {
   win: "You win! Congratulations!",
-  loose: "You lost! Try again!",
+  lose: "You lost! Try again!",
 }
 
 let gameOver = false;
@@ -18,9 +18,11 @@ const playgroundCells = document.querySelector(".playground__cells");
 const modalText = document.querySelector(".playground__modal-text");
 const modalWindow = document.querySelector(".playground__modal");
 const modalBtn = document.querySelector(".btn-newgame");
+const difficultyBtns = document.querySelectorAll(".header-menu__btn-difficulty");
 
 
 function setup() {
+
   // Print cells
   for (let i = 0; i < Math.pow(size,2); i++) {
     const cell = document.createElement('div');
@@ -31,7 +33,7 @@ function setup() {
   cells = document.querySelectorAll(".playground__cell");
   playgroundCellsSize = Math.sqrt(cells.length);
 
-  document.documentElement.style.setProperty('--tileSize', `${cellsSize}px`);
+  document.documentElement.style.setProperty('--cellsSize', `${cellsSize}px`);
   document.documentElement.style.setProperty('--playgroundCellsSize', `${playgroundCellsSize*cellsSize}px`);
 
   let x = 0;
@@ -171,7 +173,7 @@ function checkCell(coordinate) {
 }
 
 function endGame() {
-  modalText.innerHTML = textMessage.loose;
+  modalText.innerHTML = textMessage.lose;
   modalWindow.classList.add("open-modal");
   gameOver = true;
   cells.forEach(cell => {
@@ -211,8 +213,22 @@ function newGame() {
   setup();
 }
 
+difficultyBtns.forEach(btn => {
+  btn.addEventListener("click", ()=>{
+    difficultyLevel(btn)
+  });
+})
+
+function difficultyLevel(btn) {
+  let difficulty = btn.getAttribute("data-difficulty").split(',');
+  size = Number(difficulty[0]);
+  cellsSize = Number(difficulty[1]);
+  bombCount = Number(difficulty[2]);
+  newGame();
+}
+
 modalBtn.addEventListener('click', () => {
-  newGame()
+  newGame();
 })
 
 

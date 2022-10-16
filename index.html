@@ -13,14 +13,27 @@
 </head>
 <body>
   <header>
+    <div class="header-menu">
+      <div class="header-menu__container">
+        <div class="header-menu__icon">
 
+        </div>
+        <nav>
+          <ul class="header-menu__options">
+            <li class="header-menu__option"><button class="btn header-menu__btn-difficulty" data-difficulty="10,50,15">Easy</button></li>
+            <li class="header-menu__option"><button class="btn header-menu__btn-difficulty" data-difficulty="15,50,40">Medium</button></li>
+            <li class="header-menu__option"><button class="btn header-menu__btn-difficulty" data-difficulty="25,40,105">Hard</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
   <main>
     <section class="playground">
       <div class="playground__container">
         <div class="playground__modal">
           <p class="playground__modal-text"></p>
-          <button class="playground__btn btn-newgame">New game</button>
+          <button class="btn btn-newgame">New game</button>
         </div>
         <div class="playground__cells">
 

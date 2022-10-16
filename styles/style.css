@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root {
-  --cellsSize: 50px;
+  --cellsSize: 0px;
   --playgroundCellsSize: 0px;
 }
 
@@ -80,10 +80,23 @@ body {
   font-family: "Audiowide", cursive;
 }
 
+.header-menu__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-menu__options {
+  display: flex;
+}
+
 .playground__container {
   position: relative;
   max-width: 1200px;
-  margin: 50px auto;
+  margin: 25px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,7 +134,7 @@ body {
   background-color: rgb(59, 59, 59);
 }
 
-.playground__btn {
+.btn {
   width: 150px;
   height: 50px;
   font-size: 20px;
@@ -131,13 +144,13 @@ body {
   border: 2px outset rgb(255, 255, 255);
   transition: 0.3s;
 }
-.playground__btn:hover {
+.btn:hover {
   cursor: pointer;
   color: rgb(255, 174, 0);
   border: 2px outset rgb(255, 174, 0);
   transition: 0.3s;
 }
-.playground__btn:active {
+.btn:active {
   border: 2px inset rgb(255, 255, 255);
   transform: scale(0.99);
   transition: 0.3s;

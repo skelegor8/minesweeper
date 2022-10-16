@@ -17,19 +17,33 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 // Обнуление стилей
 
 :root{
-	--cellsSize: 50px;
+	--cellsSize: 0px;
 	--playgroundCellsSize: 0px;
 }
 
 body{
   font-family: 'Audiowide', cursive;
 }
+// --- header ---
+.header-menu__container{
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-menu__options{
+  display: flex;
+}
 
 
+// --- main ---
 .playground__container{
   position: relative;
   max-width: 1200px;
-  margin: 50px auto;
+  margin: 25px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +80,7 @@ body{
   background-color: rgb(59, 59, 59);
 }
 
-.playground__btn{
+.btn{
   width: 150px;
   height: 50px;
   font-size: 20px;
