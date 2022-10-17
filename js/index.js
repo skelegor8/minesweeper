@@ -4,6 +4,7 @@ let cellsSize = 50;
 let playgroundCellsSize;
 let bombs = [];
 let bombCount = 15;
+let flagCount = bombCount;
 let bombFrequency = 0.2;
 let number = [];
 let numberColor = ['#3498db', '#2ecc71', '#e74c3c', '#9b59b6', '#f1c40f', '#1abc9c', '#34495e', '#7f8c8d',];
@@ -19,6 +20,7 @@ const modalText = document.querySelector(".playground__modal-text");
 const modalWindow = document.querySelector(".playground__modal");
 const modalBtn = document.querySelector(".btn-newgame");
 const difficultyBtns = document.querySelectorAll(".header-menu__btn-difficulty");
+const bombsCountText = document.querySelector(".bombs-count");
 
 
 function setup() {
@@ -30,6 +32,7 @@ function setup() {
     playgroundCells.appendChild(cell);
   }
 
+  bombsCountText.innerHTML = flagCount;
   cells = document.querySelectorAll(".playground__cell");
   playgroundCellsSize = Math.sqrt(cells.length);
 
@@ -108,9 +111,13 @@ function flag(cell) {
     if (!cell.classList.contains('flag-cell')) {
       cell.innerHTML = '🚩';
       cell.classList.add('flag-cell');
+      flagCount--;
+      bombsCountText.innerHTML = flagCount;
     } else {
       cell.innerHTML = '';
       cell.classList.remove('flag-cell');
+      flagCount++;
+      bombsCountText.innerHTML = flagCount;
     }
   }
 }
@@ -205,6 +212,7 @@ function newGame() {
   bombs = [];
   number = [];
   gameOver = false;
+  flagCount = bombCount;
   modalText.innerHTML = '';
   modalWindow.classList.remove("open-modal");
   cells.forEach(cell => {
@@ -224,6 +232,7 @@ function difficultyLevel(btn) {
   size = Number(difficulty[0]);
   cellsSize = Number(difficulty[1]);
   bombCount = Number(difficulty[2]);
+  flagCount = bombCount;
   newGame();
 }
 
