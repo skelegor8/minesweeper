@@ -4,10 +4,13 @@ let cellsSize = 50;
 let playgroundCellsSize;
 let bombs = [];
 let bombCount = 15;
+let helpCount = Math.round(bombCount / 3);
 let flagCount = bombCount;
 let bombFrequency = 0.2;
 let number = [];
 let numberColor = ['#3498db', '#2ecc71', '#e74c3c', '#9b59b6', '#f1c40f', '#1abc9c', '#34495e', '#7f8c8d',];
+let bombImg = '<img src="./img/icon-bomb.png" alt="bomb">';
+let flagImg = '<img src="./img/icon-flag.png" alt="bomb">';
 let textMessage = {
   win: "You win! Congratulations!",
   lose: "You lost! Try again!",
@@ -21,6 +24,7 @@ const modalWindow = document.querySelector(".playground__modal");
 const modalBtn = document.querySelector(".btn-newgame");
 const difficultyBtns = document.querySelectorAll(".header-menu__btn-difficulty");
 const bombsCountText = document.querySelector(".bombs-count");
+const helpBtn = document.querySelector(".playground__help-btn")
 
 
 function setup() {
@@ -35,7 +39,7 @@ function setup() {
   bombsCountText.innerHTML = flagCount;
   cells = document.querySelectorAll(".playground__cell");
   playgroundCellsSize = Math.sqrt(cells.length);
-
+  helpBtn.innerHTML = `Help find a mine: ${helpCount}`;
   document.documentElement.style.setProperty('--cellsSize', `${cellsSize}px`);
   document.documentElement.style.setProperty('--playgroundCellsSize', `${playgroundCellsSize*cellsSize}px`);
 
@@ -109,10 +113,11 @@ function flag(cell) {
   }
   if (!cell.classList.contains('check-cell')) {
     if (!cell.classList.contains('flag-cell')) {
-      cell.innerHTML = '🚩';
+      cell.innerHTML = flagImg;
       cell.classList.add('flag-cell');
       flagCount--;
       bombsCountText.innerHTML = flagCount;
+      cell.classList.remove("help-cell");
     } else {
       cell.innerHTML = '';
       cell.classList.remove('flag-cell');
@@ -188,7 +193,7 @@ function endGame() {
     if (bombs.includes(coordinate)) {
       cell.classList.remove('flag-cell');
       cell.classList.add('check-cell');
-      cell.innerHTML = "💣";
+      cell.innerHTML = bombImg;
     }
   })
 }
@@ -213,7 +218,9 @@ function newGame() {
   number = [];
   gameOver = false;
   flagCount = bombCount;
+  helpCount = Math.round(bombCount / 3);
   modalText.innerHTML = '';
+  helpBtn.innerHTML = `Help find a mine: ${helpCount}`;
   modalWindow.classList.remove("open-modal");
   cells.forEach(cell => {
     cell.remove();
@@ -240,7 +247,29 @@ modalBtn.addEventListener('click', () => {
   newGame();
 })
 
+function helpFindMine() {
+  if (helpCount == 0) {
+    return
+  } else {
+    for (let i = 0; i < cells.length;i++){
+      let coordinate = cells[i].getAttribute("data-coords");
+      if (bombs.includes(coordinate)) {
+        if (cells[i].classList.contains("flag-cell")) {
+          continue;
+        }
+        cells[i].classList.add("help-cell");
+        cells[i].innerHTML = bombImg;
+        helpCount--;
+        helpBtn.innerHTML = `Help find a mine: ${helpCount}`;
+        break;
+      }
+    }
+  }
+}
 
+helpBtn.addEventListener("click", () => {
+  helpFindMine();
+})
 
 
 
