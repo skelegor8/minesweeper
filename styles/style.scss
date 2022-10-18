@@ -72,8 +72,9 @@ body{
   pointer-events: none;
   opacity: 0;
   transition: .7s;
+  z-index: 10;
   &.open-modal{
-    top: 47px;
+    top: 50px;
     opacity: 1;
     pointer-events: auto;
     transition: .7s;
@@ -110,9 +111,15 @@ body{
     transition: .3s;
   }
 }
+
+.playground__menu{
+  width: var(--playgroundCellsSize);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+}
 .playground__bombs-count{
-  align-self: start;
-  font-size: 20px;
   display: flex;
   align-items: center;
 }
@@ -124,7 +131,14 @@ body{
   background-color: rgb(59, 59, 59);
 }
 
+.playground__help-btn{
+  width: auto;
+  height: auto;
+  padding: 5px;
+}
+
 .playground__cells{
+  cursor: pointer;
   margin: 10px 0;
   width: var(--playgroundCellsSize);
   flex-wrap: wrap;
@@ -166,6 +180,15 @@ body{
     &:active{
       background-color: rgb(59, 59, 59);
       border: 2px outset rgb(255, 255, 255);
+    }
+  }
+  img{
+    width: 80%;
+
+  }
+  &.help-cell{
+    img{
+      filter: contrast(0%) brightness(10);
     }
   }
 }
